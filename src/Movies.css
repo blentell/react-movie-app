@@ -1,0 +1,29 @@
+.searchbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  margin-top: 7px;
+  margin-left: 5px;
+  height: 35px;
+  width: 100px;
+  font-weight: 900;
+  font-size: larger;
+}
+
+.input {
+  margin-top: 15px;
+  height: 28px;
+  width: 200px;
+  font-size: larger;
+  font-weight: 900;
+}
+
+.span {
+  margin-top: 7px;
+  color: red;
+  font-size: larger;
+}
