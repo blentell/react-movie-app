@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Movies from "../movies/Movies";
+import MovieDetails from "../movies/MoviesDetails";
 
 export class MainMovie extends Component {
 	state = {
@@ -15,34 +15,39 @@ export class MainMovie extends Component {
 		});
 		try {
 			let payload = await axios.get(
-				`https://www.omdbapi.com/?apikey=12384fbb&s=${search}&type=movie`
+				`https://www.omdbapi.com/?apikey=12384fbb&t=${this.props.match.params.name}&type=movie`
 			);
-
+			console.log(payload.data);
+				
 			this.setState({
-				moviesArray: payload.data.results,
+				moviesArray: payload.data,
 				isLoading: false,
+			}, () => {
+				console.log(this.state.moviesArray);
 			});
-		} catch (e) {}
+	
+
+		} catch (e) { }
 	}
 	render() {
+		const { moviesArray } = this.state;
 		return (
 			<div>
 				{this.state.isLoading ? (
 					<div>...loading</div>
 				) : (
-					this.state.moviesArray.map((item) => {
-						return (
-							<div key={item.title}>
-								<Link to={`/fetch-movie/${item.title}`}>
-									<div>{item.title}</div>{" "}
-								</Link>
+					<div className="title">
+						<img src={moviesArray.Poster} alt="movie" />
+						<div className="title">
+							Title: <b>{moviesArray.Title}</b>
+							<div>
+								Rating: <b>{moviesArray.imdbRating}</b>
 							</div>
-						);
-					})
+						</div>
+					</div>
 				)}
 			</div>
 		);
 	}
 }
-
 export default MainMovie;

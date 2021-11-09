@@ -1,23 +1,28 @@
 import React from "react";
 // import PropTypes from "prop-types";
 import "../../MovieDetails.css";
+import { Link } from "react-router-dom";
 
 
-function MovieDetails(props) {
+
+function MoviesDetails(props) {
 	return (
 		<div className="MovieTabs">
 			{props.moviesArray.map((item) => {
 				// console.log(item.data.imdbRating);
 				return (
+					<Link to={`/fetch-movie/${item.data.Title}`}>									
+								
 					<div className="title" key={item.data.Poster}>
 						<img src={item.data.Poster} alt="movie" />
-						<div className="title" key={item.data.Title}>
+						<div className="title">
 							Title: <b>{item.data.Title}</b>
-							<div key={item.data.imdbRating}>
+							<div>
 								Rating: <b>{item.data.imdbRating}</b>
 							</div>
-						</div>
+							</div>
 					</div>
+							</Link>
 				);
 			})}
 		</div>
@@ -31,4 +36,4 @@ function MovieDetails(props) {
 // 	moviesArray: PropTypes.array.isRequired,
 // };
 
-export default MovieDetails;
+export default MoviesDetails;
